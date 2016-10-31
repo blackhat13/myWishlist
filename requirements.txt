@@ -1,0 +1,8 @@
+bcrypt==3.1.1
+cffi==1.8.3
+chardet==2.3.0
+Django==1.10.2
+django-csvimport==2.4
+django-extensions==1.7.4
+pycparser==2.14
+six==1.10.0

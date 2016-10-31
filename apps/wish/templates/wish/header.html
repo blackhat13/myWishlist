@@ -1,0 +1,29 @@
+<div class="topbar">
+    <div class="fill">
+        <div class="container span18">
+            <a class="brand">Quotes</a>
+            <ul class="nav">
+                <li class='radio'><a href="/home">Home</a></li>
+            </ul>
+
+            {% if not request.session.name %}
+                <h2 class="pull-left">Welcome Guest</h2>
+                <form action='/login' class="pull-right">
+                    {% csrf_token %}
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            {% endif %}
+
+            {% if request.session.name %}
+                <h2 class="pull-left">Welcome {{ request.session.name }}</h2>
+                <form class="pull-right" action="/logout" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="logout">
+                    <button type="submit" name="logoutbtn" class='btn btn-secondary'>Logout</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>

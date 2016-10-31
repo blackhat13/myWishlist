@@ -1,0 +1,63 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+
+    <script src="{% static 'wish/scripts/jquery.min.js' %}"></script>
+    <script src="{% static 'wish/scripts/bootstrap-dropdown.js' %}"></script>
+
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $('#topbar').dropdown();
+        });
+    </script>
+
+    <!-- Le styles -->
+    <link href="{% static 'wish/styles/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'wish/styles/mystyles.css' %}">
+</head>
+
+<body>
+<div class="topbar">
+    <div class="fill">
+        <div class="container span18">
+            <a class="brand">Quotes</a>
+            <ul class="nav">
+                <li class='radio'><a href="/home">Home</a></li>
+            </ul>
+
+            {% if not request.session.name %}
+                <h2 class="pull-left">Welcome Guest</h2>
+                <form action='/login' class="pull-right">
+                    {% csrf_token %}
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            {% endif %}
+
+            {% if request.session.name %}
+                <h2 class="pull-left">Welcome {{ request.session.name }}</h2>
+                <form class="pull-right" action="/logout" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="logout">
+                    <button type="submit" name="logoutbtn" class='btn btn-secondary'>Logout</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<p><a href="/home">Dashboard</a> | <a href="/logout">Logout</a></p>
+<p>Posts by {{ author }}</p>
+<p>Count: {{ count }}</p>
+
+{% for quote in quotes %}
+    <div>
+        {{ quote.quoted_by }}: {{ quote.message }}
+    </div>
+{% endfor %}
+</body>
+</html>
