@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
             ],
             managers=[
-                ('UserManager', django.db.models.manager.Manager()),
+                ('UserHandler', django.db.models.manager.Manager()),
             ],
         ),
         migrations.AddField(

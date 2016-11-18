@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^login', views.loginUser),
     url(r'^logout', views.logout),
     url(r'^register$', views.registerUser),
-    url(r'^addQuote$', views.addQuote),
-    url(r'^singleQuote/(?P<created_by>\w+)$', views.singleQuote),
+    url(r'^addMovie$', views.addMovie),
+    url(r'^singleMovie/(?P<created_by>\w+)$', views.singleMovie),
     url(r'^addremove$', views.addremove)
 ]

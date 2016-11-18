@@ -4,27 +4,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Home Page</title>
 
-    <script src="{% static 'wish/scripts/jquery.min.js' %}"></script>
-    <script src="{% static 'wish/scripts/bootstrap-dropdown.js' %}"></script>
-
-    <script type='text/javascript'>
-        $(document).ready(function () {
-            $('#topbar').dropdown();
-        });
-    </script>
-
-    <!-- Le styles -->
-    <link href="{% static 'wish/styles/bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'wish/styles/mystyles.css' %}">
 </head>
 
 <body>
 <div class="topbar">
     <div class="fill">
         <div class="container span18">
-            <a class="brand">Quotes</a>
+            <a class="brand">Movies</a>
             <ul class="nav">
                 <li class='radio'><a href="/home">Home</a></li>
             </ul>
@@ -50,13 +38,13 @@
         </div>
     </div>
 </div>
-<p><a href="/home">Dashboard</a> | <a href="/logout">Logout</a></p>
-<p>Posts by {{ author }}</p>
+<p><a href="/home">My Dashboard</a> | <a href="/logout">Logout</a></p>
+<p>Posts:{{ author }}</p>
 <p>Count: {{ count }}</p>
 
-{% for quote in quotes %}
+{% for movie in movies %}
     <div>
-        {{ quote.quoted_by }}: {{ quote.message }}
+        {{ movie.movie_by }}: {{ movie.message }}
     </div>
 {% endfor %}
 </body>

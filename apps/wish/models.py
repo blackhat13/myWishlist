@@ -8,7 +8,7 @@ now = datetime.datetime.now()
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 
-class UserManager(models.Manager):
+class UserHandler(models.Manager):
     def login(self, email_in, pwd_in):
         error = False
         if len(email_in) < 2:
@@ -23,7 +23,7 @@ class UserManager(models.Manager):
         if error is True:
             return False
         else:
-            passwordHash = Users.UserManager.filter(email=email_in).last().password.encode()
+            passwordHash = Users.UserHandler.filter(email=email_in).last().password.encode()
             if bcrypt.hashpw(pwd_in, passwordHash) == passwordHash:
                 return True
             else:
@@ -48,7 +48,7 @@ class UserManager(models.Manager):
             return [False, error]
         else:
             hashedPW = bcrypt.hashpw(pwd_up, bcrypt.gensalt())
-            Users.UserManager.create(name=name_up, username=username_up, email=email_up, password=hashedPW,
+            Users.UserHandler.create(name=name_up, username=username_up, email=email_up, password=hashedPW,
                                      created_at=now)
             return [True]
 
@@ -77,12 +77,12 @@ class UserManager(models.Manager):
             return False
 
 
-class QuoteManager(models.Manager):
-    def addQuote(self, quoted_by, newMsg, user):
+class MovieHandler(models.Manager):
+    def addMovie(self, movie_by, newMsg, user):
         error = []
-        if len(quoted_by) < 3:
+        if len(movie_by) < 3:
             error.append("Too short!! Quoted BY Filed should be at least 3 characters")
-        elif not quoted_by:
+        elif not movie_by:
             error.append("This field must be filled out")  # END OF QUOTED BY VALIDATION
 
         if len(newMsg) < 10:
@@ -93,13 +93,13 @@ class QuoteManager(models.Manager):
         if len(error) > 0:
             return [False, error]
         else:
-            newQuote = Quotes.QuoteManager.create(message=newMsg, quoted_by=quoted_by, created_by=user.username,
+            newMovie = Movies.MovieHandler.create(message=newMsg, movie_by=movie_by, created_by=user.username,
                                                   created_at=now, updated_at=now)
             return [True]
 
 
-    def validquoted_by(self, quoted_by):
-        if len(quoted_by) < 3:
+    def validmovie_by(self, movie_by):
+        if len(movie_by) < 3:
             return True
         else:
             return False
@@ -118,14 +118,14 @@ class Users(models.Model):
     date = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    UserManager = UserManager()
+    UserHandler = UserHandler()
 
 
-class Quotes(models.Model):
+class Movies(models.Model):
     message = models.CharField(max_length=45)
-    quoted_by = models.CharField(max_length=30, blank=True)
+    movie_by = models.CharField(max_length=30, blank=True)
     owned_by = models.ManyToManyField(Users, blank=True)
     created_by = models.CharField(max_length=30, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    QuoteManager = QuoteManager()
+    MovieHandler = MovieHandler()

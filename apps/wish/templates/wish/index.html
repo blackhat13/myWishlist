@@ -2,18 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Login &amp; Sign Up Page 1</title>
+    <title>Login &amp; Sign-Up Page #1</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <script src="static/wish/scripts/jquery.min.js"></script>
-    <script src="static/wish/scripts/bootstrap-dropdown.js"></script>
 
     <script type='text/javascript'>
         $(document).ready(function () {
@@ -40,7 +32,6 @@
         });
     </script>
 
-    <!-- Le styles -->
     <link href="static/wish/styles/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -50,11 +41,11 @@
     <div class="fill">
         <div class="container">
             {% if not request.session.name %}
-                <h2 class="pull-left">Welcome Guest</h2>
+                <h2 class="pull-left">Welcome, guest!</h2>
                 <form action='/' class="pull-right">
                     {% csrf_token %}
                     <div class="pull-right">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">My Login</button>
                     </div>
                 </form>
             {% endif %}
@@ -77,7 +68,7 @@
         <div class="well span6 offset2">
             <form action="/register" method="post" class='form-stacked' id='sign-up-form'>
                 {% csrf_token %}
-                <h2>Sign Up for Free</h2>
+                <h2>Sign Up Below</h2>
 
                 <div class='cleaner_h20'></div>
                 <div class="clearfix">
@@ -161,10 +152,12 @@
 
                 <ul class="inputs-list">
                     <li>
+                        <!--
                         <label>
                             <input type="checkbox" name="terms_up" id='terms_up' value="yes" checked='true'/>
                             <label for='terms_up'>Agree to <a href='#'>Terms of Use</a></label>
                         </label>
+                        -->
                     </li>
                 </ul>
 
@@ -216,20 +209,20 @@
                         <li>
                             <label>
                                 <input type="checkbox" name="remember_in" id='remember_in' value="yes" checked='true'/>
-                                <label for='remember_in'>Remember me</label>
+                                <label for='remember_in'>Remember my logins</label>
                             </label>
                         </li>
                     </ul>
 
                     <div class='cleaner_h20'></div>
                     <input type='submit' value='Sign In &raquo;' id='submit_in' name='submit_in' class="btn primary"/>
-                    <span class='switch' data-switch='forgot-password-form'>Forgot my password</span>
+                    <span class='switch' data-switch='forgot-password-form'>I Forgot my password</span>
                 </div>
             </form>
 
             <form class='form-stacked hide' id='forgot-password-form'>
                 {% csrf_token %}
-                <h2>Forgot Password</h2>
+                <h2>Forgot Password?</h2>
                 <div class='cleaner_h20'></div>
 
                 <div class="clearfix">
@@ -237,7 +230,7 @@
                     <div class="input">
                         <input id="email_pwd" name="email_pwd" size="30" type="text"/>
                         <div class='cleaner_h10'></div>
-                        <span class='switch' data-switch='sign-in-form'>Never mind, I remember my password</span>
+                        <span class='switch' data-switch='sign-in-form'>Ooops, I remembered my password..!</span>
                     </div>
                 </div>
 
